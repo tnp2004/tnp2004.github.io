@@ -2,24 +2,26 @@
 import Layout from "../layouts/Layout.astro";
 import githubIcon from "../../public/github-icon.svg";
 import facebookIcon from "../../public/facebook-icon.svg";
+import pawIcon from "../../public/paw-icon.svg";
 import LinkButton from "../components/LinkButton.astro";
+import ProjectBtn from "../components/pathBtn/ProjectBtn.astro";
 ---
 
 <Layout>
   <div class="m-auto text-center text-slate-300 p-2">
     <div class="my-5">
       <h1 class="text-6xl mb-10 text-slate-200">
-        Hi there!, I'm <span class="text-emerald-300 font-bold">Ice</span>
+        Hi there!, I'm <span class="text-emerald-300 font-bold w-fit">Ice<img class="inline w-10 mx-4" src={pawIcon.src} alt="paw-icon">
+		</span>
       </h1>
       <span class="text-3xl bg-slate-800 bg-opacity-30 rounded px-2"
         >just a student who loved cats and coding</span
       >
     </div>
-    <div class="h-20 flex gap-5 justify-center">
-
+    <div class="flex gap-5 justify-center">
 	  <LinkButton title="Github" link="https://github.com/tnp2004" icon={githubIcon} />
       <LinkButton title="Facebook" link="https://www.facebook.com/thanapoom.kongpan.7" icon={facebookIcon} />
-
+	  <ProjectBtn />
     </div>
   </div>
 </Layout>
