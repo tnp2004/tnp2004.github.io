@@ -1,15 +1,37 @@
 ---
 import BackBtn from "../components/pathBtn/BackBtn.astro";
 import Layout from "../layouts/Layout.astro";
-import RepoIcon from "../../public/repo-icon.svg"
+import RepoIcon from "../../public/repo-icon.svg";
+import type { Repository } from "../../types/interfaces.ts";
+
+const fetchRepositories = async (): Promise<Repository[]> => {
+  const res = await fetch("https://api.github.com/users/tnp2004/repos");
+  if (!res.ok) {
+    return [];
+  }
+  const repos = await res.json();
+  return repos;
+};
+
+const repos = await fetchRepositories();
 ---
 
 <Layout>
-    <div class="m-auto bg-zinc-900 border-zinc-800 border-2 drop-shadow-lg w-[450px] h-2/3 rounded text-center static">
-        <BackBtn />
+  <div
+    class="m-auto bg-zinc-900 border-zinc-800 border-2 drop-shadow-2xl w-[450px] h-2/3 rounded text-center static">
+    <BackBtn />
     <h1 class="text-2xl font-bold my-3">
-        <img class="inline mx-1" src={RepoIcon.src} alt="repo-icon">
-        <span>Project</span>
+      <img class="inline mx-1" src={RepoIcon.src} alt="repo-icon" />
+      <span>Project</span>
     </h1>
+    <div class="h-full">
+      {
+        repos.length != 0 ? (
+          repos.map((repo: Repository) => <div>{repo.name}</div>)
+        ) : (
+          <span class="text-slate-300">something went wrong</span>
+        )
+      }
+    </div>
   </div>
 </Layout>
