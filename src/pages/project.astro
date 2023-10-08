@@ -3,35 +3,51 @@ import BackBtn from "../components/pathBtn/BackBtn.astro";
 import Layout from "../layouts/Layout.astro";
 import RepoIcon from "../../public/repo-icon.svg";
 import type { Repository } from "../../types/interfaces.ts";
+import RepoBtn from "../components/pathBtn/RepoBtn.astro";
+import ErrLabel from "../components/ErrLabel.astro";
+let fetchRepoStatus: Number = 0;
 
 const fetchRepositories = async (): Promise<Repository[]> => {
   const res = await fetch("https://api.github.com/users/tnp2004/repos");
   if (!res.ok) {
+    fetchRepoStatus = res.status;
     return [];
   }
   const repos = await res.json();
   return repos;
 };
 
-const repos = await fetchRepositories();
+const sortRepositoriesByCreatedAt = (
+  repositories: Repository[]
+): Repository[] => {
+  return repositories.sort(
+    (a, b) =>
+      new Date(b.created_at).valueOf() - new Date(a.created_at).valueOf()
+  );
+};
+
+const repos = sortRepositoriesByCreatedAt(await fetchRepositories());
 ---
 
 <Layout>
   <div
     class="m-auto bg-zinc-900 border-zinc-800 border-2 drop-shadow-2xl w-[450px] h-2/3 rounded text-center static">
     <BackBtn />
-    <h1 class="text-2xl font-bold my-3">
+    <h1 class="text-2xl font-bold my-3 h-1/9">
       <img class="inline mx-1" src={RepoIcon.src} alt="repo-icon" />
       <span>Project</span>
     </h1>
-    <div class="h-full">
-      {
-        repos.length != 0 ? (
-          repos.map((repo: Repository) => <div>{repo.name}</div>)
-        ) : (
-          <span class="text-slate-300">something went wrong</span>
-        )
-      }
-    </div>
+
+      <div class="h-[90%] p-2 overflow-y-auto custom-scrollbar">
+        {
+          repos.length != 0 ? (
+            repos.map((repo: Repository) => (
+              <RepoBtn title={repo.name} link={repo.html_url} />
+            ))
+          ) : fetchRepoStatus === 403 ? 
+           <ErrLabel title="API rate limit exceeded" /> : <ErrLabel title="Something went wrong" />
+        }
+      </div>
+
   </div>
 </Layout>
