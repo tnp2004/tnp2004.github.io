@@ -1,26 +1,29 @@
 ---
-const { title, link } = Astro.props;
+const { title, link, lang } = Astro.props;
 ---
 
-<div class="text-start text-xl mb-5 last:mb-0 group cursor-pointer w-fit hover:bg-zinc-700 rounded px-1">
-  <a href={link} target="_blank">
-    <svg
-      class="inline mr-2 group-hover:text-white"
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      stroke-width="2"
-      stroke-linecap="round"
-      stroke-linejoin="round"
-      class="lucide lucide-album"
-      ><rect width="18" height="18" x="3" y="3" rx="2" ry="2"></rect><polyline
-        points="11 3 11 11 14 8 17 11 17 3"></polyline></svg
-    >
-    <label class="group-hover:text-white cursor-pointer" for="title"
-      >{title}</label
-    >
-  </a>
-</div>
+<a href={link} target="_blank" class="mb-5 last:mb-0 block">
+<div class="text-start text-xl group cursor-pointert hover:bg-zinc-700 rounded px-1 flex justify-between">
+  <div>
+      <svg
+        class="inline mr-2 group-hover:text-white"
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        class="lucide lucide-album"
+        ><rect width="18" height="18" x="3" y="3" rx="2" ry="2"></rect><polyline
+          points="11 3 11 11 14 8 17 11 17 3"></polyline></svg
+      >
+      <label class="group-hover:text-white cursor-pointer" for="title"
+        >{title}</label
+      >
+    </div>
+    <label class="text-zinc-500 group-hover:text-zinc-300" for="language">{lang}</label>
+  </div>
+</a>
