@@ -31,7 +31,7 @@ const repos = sortRepositoriesByCreatedAt(await fetchRepositories());
 
 <Layout>
   <div
-    class="m-auto bg-zinc-900 border-zinc-800 border-2 drop-shadow-2xl w-[450px] h-2/3 rounded text-center static pb-1">
+    class="m-auto bg-zinc-900 border-zinc-800 md:border-2 drop-shadow-2xl md:w-[450px] md:h-2/3 rounded text-center static pb-5">
     <BackBtn />
     <h1 class="text-2xl font-bold my-3 h-1/9">
       <img class="inline mx-1" src={RepoIcon.src} alt="repo-icon" />
