@@ -9,7 +9,6 @@
     <meta name="description" content="Astro description" />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/cat-icon.svg" />
-    <link rel="stylesheet" href={isDev ?  "../../style.css": "https://github.com/tnp2004/tnp2004.github.io/blob/main/style.css"}>
     <meta name="generator" content={Astro.generator} />
     <title>tnp2004</title>
   </head>
@@ -29,4 +28,28 @@
   * {
     font-family: "Fira Mono", monospace;
   }
+
+  
+/* width */
+::-webkit-scrollbar { 
+    width: 5px;
+    
+} 
+  
+/* Track */
+::-webkit-scrollbar-track { 
+    background: #f1f1f1; 
+    border-radius: 5px; 
+} 
+  
+/* Handle */
+::-webkit-scrollbar-thumb { 
+    background: #888; 
+    border-radius: 5px; 
+} 
+  
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover { 
+    background: #555; 
+}
 </style>
